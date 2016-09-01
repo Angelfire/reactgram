@@ -33,7 +33,6 @@ var App = React.createClass({
 		this.forceUpdate();
 	},
 	handleClick: function(e) {
-		console.log(this.props);
 		var index = e.target.id.replace('filter-','');
 		// console.log(this.props.filters[index].settings);
 		this.props.data.settings[0].value = this.props.data.filters[index].settings[0].value;
