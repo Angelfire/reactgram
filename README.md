@@ -9,4 +9,4 @@ An ugly attempt for having the Instagram filters in the browser
 - [ ] Upload/Download the image
 
 ###Credits
-The original code was taken of http://codepen.io/jackoliver/pen/BzgQYB I just bug fix and run into webpack
+The original code was taken from http://codepen.io/jackoliver/pen/BzgQYB
