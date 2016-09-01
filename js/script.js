@@ -3,143 +3,7 @@ import '../styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// Data
-var data = {
-	image: 'https://static1.squarespace.com/static/55acc005e4b098e615cd80e2/5777d3433e00be9cc0d8e3f6/5777d384d482e9910faaf472/1467473313295/13.jpg?format=2500w',
-	settings: [
-		{
-			id: 1,
-			name: 'contrast',
-			value: '100%',
-		},
-		{
-			id: 2,
-			name: 'hue',
-			value: '0deg'
-		},
-		{
-			id: 3,
-			name: 'brightness',
-			value: '100%'
-		},
-		{
-			id: 4,
-			name: 'saturate',
-			value: '100%'
-		},
-		{
-			id: 5,
-			name: 'sepia',
-			value: '0%'
-		}
-	],
-	filters: [
-		{
-			id: 0,
-			name: 'Noir',
-			settings: [
-				{
-					name: 'contrast',
-					value: '138%',
-				},
-				{
-					name: 'hue',
-					value: '0deg'
-				},
-				{
-					name: 'brightness',
-					value: '122%'
-				},
-				{
-					name: 'saturate',
-					value: '0%'
-				},
-				{
-					name: 'sepia',
-					value: '0%'
-				}
-			]
-		},
-		{
-			id: 1,
-			name: 'Aged',
-			settings: [
-				{
-					name: 'contrast',
-					value: '94%',
-				},
-				{
-					name: 'hue',
-					value: '-54deg'
-				},
-				{
-					name: 'brightness',
-					value: '92%'
-				},
-				{
-					name: 'saturate',
-					value: '100%'
-				},
-				{
-					name: 'sepia',
-					value: '44%'
-				}
-			]
-		},
-		{
-			id: 2,
-			name: 'Whiteout',
-			settings: [
-				{
-					name: 'contrast',
-					value: '32%',
-				},
-				{
-					name: 'hue',
-					value: '0deg'
-				},
-				{
-					name: 'brightness',
-					value: '173%'
-				},
-				{
-					name: 'saturate',
-					value: '0%'
-				},
-				{
-					name: 'sepia',
-					value: '0%'
-				}
-			]
-		},
-		{
-			id: 3,
-			name: 'Vintage',
-			settings: [
-				{
-					name: 'contrast',
-					value: '164%',
-				},
-				{
-					name: 'hue',
-					value: '0deg'
-				},
-				{
-					name: 'brightness',
-					value: '47%'
-				},
-				{
-					name: 'saturate',
-					value: '0%'
-				},
-				{
-					name: 'sepia',
-					value: '100%'
-				}
-			]
-		}
-	]
-};
+import data from './settings.json';
 
 // App Container
 var App = React.createClass({
@@ -151,39 +15,40 @@ var App = React.createClass({
 		var name = e.target.id;
 		switch (name) {
 			case 'contrast':
-				this.props.settings[0].value = value + '%';
+				this.props.data.settings[0].value = value + '%';
 				break;
 			case 'hue':
-				this.props.settings[1].value = value + 'deg';
+				this.props.data.settings[1].value = value + 'deg';
 				break;
 			case 'brightness':
-				this.props.settings[2].value = value + '%';
+				this.props.data.settings[2].value = value + '%';
 				break;
 			case 'saturate':
-				this.props.settings[3].value = value + '%';
+				this.props.data.settings[3].value = value + '%';
 				break;
 			case 'sepia':
-				this.props.settings[4].value = value + '%';
+				this.props.data.settings[4].value = value + '%';
 				break;
 		}
 		this.forceUpdate();
 	},
 	handleClick: function(e) {
+		console.log(this.props);
 		var index = e.target.id.replace('filter-','');
 		// console.log(this.props.filters[index].settings);
-		this.props.settings[0].value = this.props.filters[index].settings[0].value;
-		this.props.settings[1].value = this.props.filters[index].settings[1].value;
-		this.props.settings[2].value = this.props.filters[index].settings[2].value;
-		this.props.settings[3].value = this.props.filters[index].settings[3].value;
-		this.props.settings[4].value = this.props.filters[index].settings[4].value;
+		this.props.data.settings[0].value = this.props.data.filters[index].settings[0].value;
+		this.props.data.settings[1].value = this.props.data.filters[index].settings[1].value;
+		this.props.data.settings[2].value = this.props.data.filters[index].settings[2].value;
+		this.props.data.settings[3].value = this.props.data.filters[index].settings[3].value;
+		this.props.data.settings[4].value = this.props.data.filters[index].settings[4].value;
 		this.forceUpdate();
 
 	},
 	render: function() {
 		return(
 			<div className="App">
-				<ImageBG image={this.props.image} />
-				<Settings onClick={this.handleClick} onChange={this.handleChange} data={this.props} />
+				<ImageBG image={this.props.data.image} />
+				<Settings onClick={this.handleClick} onChange={this.handleChange} data={this.props.data} />
 			</div>
 		)
 	}
@@ -232,7 +97,6 @@ var Sidebar = React.createClass({
 
 var Setting = React.createClass({
 	render: function() {
-
 		if(this.props.name == 'hue') {
 
 			var value = this.props.value.replace('deg','');
