@@ -6,11 +6,10 @@ import ReactDOM from 'react-dom';
 import data from './settings.json';
 
 // App Container
-var App = React.createClass({
-	getDefaultProps: function() {
-		return(data);
-	},
-	handleChange: function(e) {
+class App extends React.Component {
+	static defaultProps = { data }
+
+	handleChange(e) {
 		var value = e.target.value;
 		var name = e.target.id;
 		switch (name) {
@@ -31,8 +30,9 @@ var App = React.createClass({
 				break;
 		}
 		this.forceUpdate();
-	},
-	handleClick: function(e) {
+	}
+
+	handleClick(e) {
 		var index = e.target.id.replace('filter-','');
 		// console.log(this.props.filters[index].settings);
 		this.props.data.settings[0].value = this.props.data.filters[index].settings[0].value;
@@ -41,9 +41,9 @@ var App = React.createClass({
 		this.props.data.settings[3].value = this.props.data.filters[index].settings[3].value;
 		this.props.data.settings[4].value = this.props.data.filters[index].settings[4].value;
 		this.forceUpdate();
+	}
 
-	},
-	render: function() {
+	render() {
 		return(
 			<div className="App">
 				<ImageBG image={this.props.data.image} />
@@ -51,20 +51,20 @@ var App = React.createClass({
 			</div>
 		)
 	}
-});
+}
 
 // Image Background
-var ImageBG = React.createClass({
-	render: function() {
+class ImageBG extends React.Component {
+	render() {
 		return (
 			<div className="ImageBG" style={{backgroundImage: 'url('+ this.props.image + ')'}}></div>
 		)
 	}
-});
+}
 
 // Settings Container
-var Settings = React.createClass({
-	render: function() {
+class Settings extends React.Component {
+	render() {
 		return (
 			<div className="Settings">
 				<div className="MainWrapper">
@@ -75,11 +75,11 @@ var Settings = React.createClass({
 			</div>
 		)
 	}
-});
+}
 
 // Sidebar
-var Sidebar = React.createClass({
-	render: function() {
+class Sidebar extends React.Component {
+	render() {
 		var onChange = this.props.onChange;
 		var settings = this.props.settings.map(function(setting, i) {
 			return <Setting onChange={onChange} name={setting.name} key={setting.id} value={setting.value} />;
@@ -92,10 +92,11 @@ var Sidebar = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
-var Setting = React.createClass({
-	render: function() {
+// Setting
+class Setting extends React.Component {
+	render() {
 		if(this.props.name == 'hue') {
 
 			var value = this.props.value.replace('deg','');
@@ -128,26 +129,24 @@ var Setting = React.createClass({
 					<input name={this.props.name} min="0" max="100" step="1" onChange={this.props.onChange} id={this.props.name} type="range" defaultValue={this.props.value} />
 				</div>
 			);
-
 		}
-
 	}
-});
+}
 
 // Image Container
-var ImageContainer = React.createClass({
-	render: function() {
+class ImageContainer extends React.Component {
+	render() {
 		return (
 			<div className="ImageContainer">
 				<Image settings={this.props.settings} image={this.props.image} />
 			</div>
 		);
 	}
-});
+}
 
 // Image
-var Image = React.createClass({
-	render: function() {
+class Image extends React.Component {
+	render() {
 
 		if(!this.props.settings == []) {
 			var filterString = "";
@@ -163,7 +162,6 @@ var Image = React.createClass({
 			});
 		}
 
-
 		var style = {
 			backgroundImage: 'url(' + this.props.image + ')',
 			WebkitFilter: filterString
@@ -178,13 +176,12 @@ var Image = React.createClass({
 		return (
 			<div id={id} className="Image" style={style}></div>
 		);
-
 	}
-});
+}
 
 // FilterList
-var FilterList = React.createClass({
-	render: function() {
+class FilterList extends React.Component {
+	render() {
 		var image = this.props.image;
 		var onClick = this.props.onClick;
 
@@ -198,18 +195,18 @@ var FilterList = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
 // Filter
-var Filter = React.createClass({
-	render: function() {
+class Filter extends React.Component {
+	render() {
 		return (
 			<div className="Filter" onClick={this.props.onClick}>
 				<Image id={'filter-' + this.props.id} settings={this.props.settings} image={this.props.image} />
 			</div>
 		);
 	}
-});
+}
 
 // Render
 ReactDOM.render(
