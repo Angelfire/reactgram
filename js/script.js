@@ -17,8 +17,9 @@ class App extends React.Component {
 	handleChange(e) {
 		var value = e.target.value;
 		var name = e.target.id;
-		switch (name) {
-			case 'contrast':
+    switch (name) {
+
+      case 'contrast':
 				this.props.data.settings[0].value = value + '%';
 				break;
 			case 'hue':
