@@ -3,11 +3,16 @@ import '../styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import data from './settings.json';
+import { data } from './settings.json';
 
 // App Container
 class App extends React.Component {
-	static defaultProps = { data }
+	constructor(props) {
+		super(props);
+
+		this.handleChange = this.handleChange.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}
 
 	handleChange(e) {
 		var value = e.target.value;
@@ -52,6 +57,8 @@ class App extends React.Component {
 		)
 	}
 }
+
+App.defaultProps = { data };
 
 // Image Background
 class ImageBG extends React.Component {
