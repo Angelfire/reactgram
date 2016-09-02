@@ -9,4 +9,4 @@ An ugly attempt for having the Instagram filters in the browser
 - [ ] Upload/Download the image
 
 ###Credits
-The original code was taken from http://codepen.io/jackoliver/pen/BzgQYB
+Based on http://codepen.io/jackoliver/pen/BzgQYB
