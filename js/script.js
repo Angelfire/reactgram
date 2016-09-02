@@ -17,8 +17,8 @@ class App extends React.Component {
   handleChange(e) {
     var value = e.target.value;
     var name = e.target.id;
-    switch (name) {
 
+    switch (name) {
       case 'contrast':
       this.props.data.settings[0].value = value + '%';
       break;
@@ -40,7 +40,7 @@ class App extends React.Component {
 
   handleClick(e) {
     var index = e.target.id.replace('filter-','');
-    // console.log(this.props.filters[index].settings);
+
     this.props.data.settings[0].value = this.props.data.filters[index].settings[0].value;
     this.props.data.settings[1].value = this.props.data.filters[index].settings[1].value;
     this.props.data.settings[2].value = this.props.data.filters[index].settings[2].value;
@@ -51,9 +51,9 @@ class App extends React.Component {
 
   render() {
     return(
-      <div className="App">
-      <ImageBG image={this.props.data.image} />
-      <Settings onClick={this.handleClick} onChange={this.handleChange} data={this.props.data} />
+      <div className="app">
+        <ImageBG image={this.props.data.image} />
+        <Settings onClick={this.handleClick} onChange={this.handleChange} data={this.props.data} />
       </div>
     )
   }
@@ -65,7 +65,7 @@ App.defaultProps = { data };
 class ImageBG extends React.Component {
   render() {
     return (
-      <div className="ImageBG" style={{backgroundImage: 'url('+ this.props.image + ')'}}></div>
+      <div className="image-bg" style={{backgroundImage: 'url('+ this.props.image + ')'}}></div>
     )
   }
 }
@@ -74,12 +74,12 @@ class ImageBG extends React.Component {
 class Settings extends React.Component {
   render() {
     return (
-      <div className="Settings">
-      <div className="MainWrapper">
-      <Sidebar onChange={this.props.onChange} settings={this.props.data.settings} />
-      <ImageContainer settings={this.props.data.settings} image={this.props.data.image} />
-      </div>
-      <FilterList onClick={this.props.onClick} filters={this.props.data.filters} image={this.props.data.image} />
+      <div className="settings">
+        <div className="main-wrapper">
+          <Sidebar onChange={this.props.onChange} settings={this.props.data.settings} />
+          <ImageContainer settings={this.props.data.settings} image={this.props.data.image} />
+        </div>
+        <FilterList onClick={this.props.onClick} filters={this.props.data.filters} image={this.props.data.image} />
       </div>
     )
   }
@@ -94,9 +94,9 @@ class Sidebar extends React.Component {
     });
 
     return (
-      <div className="Sidebar">
-      <div className="Title">Reactgram v1.0</div>
-      {settings}
+      <div className="sidebar">
+        <div className="title">Reactgram v1.0</div>
+        {settings}
       </div>
     );
   }
@@ -110,9 +110,9 @@ class Setting extends React.Component {
       var value = this.props.value.replace('deg','');
 
       return (
-        <div className="Setting">
-        <label><div>{this.props.name}</div><div>{value}</div></label>
-        <input name={this.props.name} min="-360" max="360" step="1" onChange={this.props.onChange} id={this.props.name} type="range" defaultValue={this.props.value} />
+        <div className="setting">
+          <label><div>{this.props.name}</div><div>{value}</div></label>
+          <input name={this.props.name} min="-360" max="360" step="1" onChange={this.props.onChange} id={this.props.name} type="range" defaultValue={this.props.value} />
         </div>
       );
 
@@ -121,9 +121,9 @@ class Setting extends React.Component {
       var value = this.props.value.replace('%','');
 
       return (
-        <div className="Setting">
-        <label><div>{this.props.name}</div><div>{value}</div></label>
-        <input name={this.props.name} min="0" max="200" step="1" onChange={this.props.onChange} id={this.props.name} type="range" defaultValue={this.props.value} />
+        <div className="setting">
+          <label><div>{this.props.name}</div><div>{value}</div></label>
+          <input name={this.props.name} min="0" max="200" step="1" onChange={this.props.onChange} id={this.props.name} type="range" defaultValue={this.props.value} />
         </div>
       );
 
@@ -132,9 +132,9 @@ class Setting extends React.Component {
       var value = this.props.value.replace('%','');
 
       return (
-        <div className="Setting">
-        <label><div>{this.props.name}</div><div>{value}</div></label>
-        <input name={this.props.name} min="0" max="100" step="1" onChange={this.props.onChange} id={this.props.name} type="range" defaultValue={this.props.value} />
+        <div className="setting">
+          <label><div>{this.props.name}</div><div>{value}</div></label>
+          <input name={this.props.name} min="0" max="100" step="1" onChange={this.props.onChange} id={this.props.name} type="range" defaultValue={this.props.value} />
         </div>
       );
     }
@@ -145,8 +145,8 @@ class Setting extends React.Component {
 class ImageContainer extends React.Component {
   render() {
     return (
-      <div className="ImageContainer">
-      <Image settings={this.props.settings} image={this.props.image} />
+      <div className="image-container">
+        <Image settings={this.props.settings} image={this.props.image} />
       </div>
     );
   }
@@ -198,7 +198,7 @@ class FilterList extends React.Component {
     });
 
     return (
-      <div className="FilterList">
+      <div className="filter-list">
       {filters}
       </div>
     );
@@ -209,7 +209,7 @@ class FilterList extends React.Component {
 class Filter extends React.Component {
   render() {
     return (
-      <div className="Filter" onClick={this.props.onClick}>
+      <div className="filter" onClick={this.props.onClick}>
       <Image id={'filter-' + this.props.id} settings={this.props.settings} image={this.props.image} />
       </div>
     );
