@@ -7,12 +7,12 @@ import { data } from './settings.json';
 
 // App Container
 class App extends React.Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this.handleChange = this.handleChange.bind(this);
-		this.handleClick = this.handleClick.bind(this);
-	}
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
 	handleChange(e) {
 		var value = e.target.value;
