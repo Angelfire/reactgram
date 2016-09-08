@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 
 import { data } from './settings.json';
 
+// Components
+import ImageBG from './components/ImageBG';
+
 // App Container
 class App extends React.Component {
   constructor(props) {
@@ -60,15 +63,6 @@ class App extends React.Component {
 }
 
 App.defaultProps = { data };
-
-// Image Background
-class ImageBG extends React.Component {
-  render() {
-    return (
-      <div className="image-bg" style={{backgroundImage: 'url('+ this.props.image + ')'}}></div>
-    )
-  }
-}
 
 // Settings Container
 class Settings extends React.Component {
